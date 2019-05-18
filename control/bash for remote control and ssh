@@ -1,0 +1,9 @@
+ssh devon@10.199.31.21
+d
+source /opt/ros/kinetic/setup.bash
+
+1
+roslaunch turtlebot_bringup minimal.launch
+
+2
+roslaunch turtlebot_teleop keyboard_teleop.launch 
