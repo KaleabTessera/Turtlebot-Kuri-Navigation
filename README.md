@@ -24,6 +24,10 @@ roslaunch turtlebot_navigation amcl_demo.launch map_file:=[MAP_FULL_PATH]
 ```
 e.g [MAP_FULL_PATH] - /home/osboxes/RoboticsProject/robotics_project_2019/src/map/my_map.yaml
 
+### Run Naviagtion
+```
+python navigate.py --org " -2,-1"
+```
 
 
 
