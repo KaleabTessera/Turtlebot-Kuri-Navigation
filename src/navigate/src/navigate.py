@@ -60,33 +60,51 @@ class NavController():
 
 
 
-		if not success:
-			self.move_base.cancel_goal()
-			rospy.loginfo("What happenned bra")
-		else:
-			# We made it!
-			state = self.move_base.get_state()
-			if state == GoalStatus.SUCCEEDED:
-				rospy.loginfo("Done moving")
+			if not success:
+				self.move_base.cancel_goal()
+				rospy.loginfo("What happenned bra")
+			else:
+				# We made it!
+				state = self.move_base.get_state()
+				if state == GoalStatus.SUCCEEDED:
+					rospy.loginfo("Done moving")
 		
 def main():
 	parser = argparse.ArgumentParser(description='Turtlebot Navigation Controller.')
 	parser.add_argument('--org','--list', help='delimited list input', type=str,nargs="*")
+	parser.add_argument('--dest','--list2', help='delimited list input', type=str,nargs="*")
 	args = parser.parse_args()
 
 	if(args.org):
 		args.org = args.org[0].split(',')
-		iniX = int(args.org[0])
-		iniY = int(args.org[1])
+		iniX = float(args.org[0])
+		iniY = float(args.org[1])
 	else:
 		iniX = -2
 		iniY = -1
 
-	goals = [[-3.7,0.087],[-2.7,0.17]]
+	if(args.dest):
+		all_goals = []
+		for dest in args.dest:
+			print dest
+			coords = []
+			goals = dest.split(',')
+			print goals
+			# for g in goals:
+			x = float(goals[0])
+			y = float(goals[1])
+			coords.append(x)
+			coords.append(y)
+			all_goals.append(coords)
+	else:
+		all_goals = [[-3.7,0.087]]
+
+	print(all_goals)
+	# goals = [[-3.7,0.087],[-2.7,0.17]]
 
 	nav = NavController()
 	nav.initialize(iniX,iniY)
-	nav.move(goals)
+	nav.move(all_goals)
 	
 if __name__== "__main__":
   main()
