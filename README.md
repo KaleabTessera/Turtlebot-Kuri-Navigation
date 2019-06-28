@@ -26,12 +26,11 @@ e.g [MAP_FULL_PATH] - /home/osboxes/RoboticsProject/robotics_project_2019/src/ma
 
 ### Run Naviagtion
 ```
-python navigate.py --org " -2,-1"
+python navigate.py --org " -2,-1" --dest " -2,0.73" " -0.2,3" " -2,-1"
+
 ```
-
-
-
-###common error
+Note the spaces before ```-``` are important. 
+### Common error
 ```
 [view_navigation.launch] is neither a launch file in package [turtlebot_rviz_launchers] nor is [turtlebot_rviz_launchers] a launch file name
 The traceback for the exception was written to the log file
