@@ -17,7 +17,7 @@ class NavController():
 		checkpoint.header.frame_id = "map"
 		checkpoint.pose.pose.position.x = x
 		checkpoint.pose.pose.position.y = y
-		checkpoint.pose.pose.position.z = 0
+		checkpoint.pose.pose.position.z = 0.349
 		
 		[x,y,z,w]=quaternion_from_euler(0,0.0,0.0)
 		checkpoint.pose.pose.orientation.x = x
@@ -27,7 +27,7 @@ class NavController():
 		
 		# print checkpoint
 		pub.publish(checkpoint)
-		rospy.sleep(2)
+		rospy.sleep(10)
 
 	def move(self,goals):
 		#tell the action client that we want to spin a thread by default
