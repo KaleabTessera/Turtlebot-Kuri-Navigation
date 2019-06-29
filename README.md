@@ -26,7 +26,7 @@ e.g [MAP_FULL_PATH] - /home/osboxes/RoboticsProject/robotics_project_2019/src/ma
 
 ### Run Naviagtion
 ```
-python navigate.py --org " 0.234,1.34" --dest " -2.75,1.35" " -2.83,-1.62" " -4.78,-2.66"  " -6.76,-0.459" " -7.85,-2.71"
+python navigate_kuri.py --org " 0.030,0.309" --dest " -1, -1.71" " 1, -3.41" " -1, -5" " 0.115, -5.74" " 1,-5" " -1,-3.53"
 
 ```
 Note the spaces before ```-``` are important. 
