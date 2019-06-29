@@ -46,12 +46,23 @@ class NavController():
 			[x,y,z,w]=quaternion_from_euler(0,0.0,0.0)
 			checkpoint.pose.orientation.x = x
 			checkpoint.pose.orientation.y = y
+			
+			if(g == goals[-1]):
+				z = 1
+				w = 0.170
+			else:
+				z = 0
+				w = 0	
 			checkpoint.pose.orientation.z = z
 			checkpoint.pose.orientation.w = 0.0
 		
 			print checkpoint
 			pub.publish(checkpoint)
-			rospy.sleep(10)
+
+			if(g == goals[-2]):
+				rospy.sleep(8)
+			else:
+				rospy.sleep(11)
 
 		
 def main():
