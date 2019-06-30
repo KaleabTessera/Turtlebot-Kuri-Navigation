@@ -41,7 +41,7 @@ class NavController():
 			checkpoint.header.frame_id = ''
 			checkpoint.pose.position.x = g[0]
 			checkpoint.pose.position.y = g[1]
-			checkpoint.pose.position.z = 0
+			checkpoint.pose.position.z = g[2]
 		
 			[x,y,z,w]=quaternion_from_euler(0,0.0,0.0)
 			checkpoint.pose.orientation.x = x
@@ -82,15 +82,19 @@ def main():
 	if(args.dest):
 		all_goals = []
 		for dest in args.dest:
-			print dest
 			coords = []
 			goals = dest.split(',')
-			print goals
 			# for g in goals:
 			x = float(goals[0])
 			y = float(goals[1])
+			if(goals[2] is not None):
+				z = g[2]
+			else:
+				z = 0
+			
 			coords.append(x)
 			coords.append(y)
+			coords.append(z)
 			all_goals.append(coords)
 	else:
 		all_goals = [[-2.12,0.372]]
