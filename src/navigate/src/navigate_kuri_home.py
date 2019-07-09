@@ -13,16 +13,16 @@ class NavController():
                 pub = rospy.Publisher('/initialpose', PoseWithCovarianceStamped, queue_size = 1)
                 rospy.sleep(2)
                 checkpoint = PoseWithCovarianceStamped()
-                checkpoint.header.frame_id = "map"
+                checkpoint.header.frame_id = "base_link"
                 checkpoint.pose.pose.position.x = x
                 checkpoint.pose.pose.position.y = y
-                checkpoint.pose.pose.position.z = -1.612
+                checkpoint.pose.pose.position.z = 0
 
                 [x,y,z,w]=quaternion_from_euler(0,0.0,0.0)
                 checkpoint.pose.pose.orientation.x = x
                 checkpoint.pose.pose.orientation.y = y
-                checkpoint.pose.pose.orientation.z = -0.701
-                checkpoint.pose.pose.orientation.w = 0.713
+                checkpoint.pose.pose.orientation.z = -0.691
+                checkpoint.pose.pose.orientation.w = 0.723
 
                 # print checkpoint
 #                pub.publish(checkpoint)
@@ -38,7 +38,7 @@ class NavController():
 			#we'll send a goal to the robot
 			rospy.sleep(2)
 			checkpoint = PoseStamped()
-			checkpoint.header.frame_id = ''
+			checkpoint.header.frame_id = 'base_link'
 			checkpoint.pose.position.x = g[0]
 			checkpoint.pose.position.y = g[1]
 			checkpoint.pose.position.z = g[2]
@@ -47,23 +47,18 @@ class NavController():
 			checkpoint.pose.orientation.x = x
 			checkpoint.pose.orientation.y = y
 			
-			if(g == goals[-1]):
-				z = 1
-				w = 0.170
-			else:
-				z = 0
-				w = 0	
-			checkpoint.pose.orientation.z = z
-			checkpoint.pose.orientation.w = 0.0
+			checkpoint.pose.orientation.z = -0.691
+			checkpoint.pose.orientation.w = 0.723
 		
 			print checkpoint
 			pub.publish(checkpoint)
 
-			if(g == goals[-2]):
-				rospy.sleep(8)
-			else:
-				rospy.sleep(11)
-
+			if(len(goals) >  1):
+				if(g == goals[-2]):
+					rospy.sleep(8)
+				else:
+					rospy.sleep(11)
+				
 		
 def main():
 	parser = argparse.ArgumentParser(description='Turtlebot Navigation Controller.')

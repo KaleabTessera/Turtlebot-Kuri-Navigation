@@ -11,22 +11,22 @@ class NavController():
 
 	def initialize(self,x,y):
 		rospy.init_node('navigate')
-		pub = rospy.Publisher('/initialpose', PoseWithCovarianceStamped, queue_size = 10)
+		pub = rospy.Publisher('/initialpose', PoseWithCovarianceStamped, queue_size = 100)
 		rospy.sleep(2)
 		checkpoint = PoseWithCovarianceStamped()
-		checkpoint.header.frame_id = "map"
+		checkpoint.header.frame_id = ""
 		checkpoint.pose.pose.position.x = x
 		checkpoint.pose.pose.position.y = y
-		checkpoint.pose.pose.position.z = 1.598
+		checkpoint.pose.pose.position.z = 0
 		
 		[x,y,z,w]=quaternion_from_euler(0,0.0,0.0)
 		checkpoint.pose.pose.orientation.x = x
 		checkpoint.pose.pose.orientation.y = y
-		checkpoint.pose.pose.orientation.z = 0.758
-		checkpoint.pose.pose.orientation.w = 0.652
+		checkpoint.pose.pose.orientation.z = z
+		checkpoint.pose.pose.orientation.w = w
 		
 		# print checkpoint
-		pub.publish(checkpoint)
+#		pub.publish(checkpoint)
 		rospy.sleep(2)
 
 	def move(self,goals):
@@ -34,11 +34,11 @@ class NavController():
 		self.move_base = actionlib.SimpleActionClient("move_base", MoveBaseAction)
 		rospy.loginfo("wait for the action server to come up")
 		#allow up to 5 seconds for the action server to come up
-		self.move_base.wait_for_server(rospy.Duration(2))
+		self.move_base.wait_for_server(rospy.Duration(5))
 		for g in goals:
 			#we'll send a goal to the robot
 			goal = MoveBaseGoal()
-			goal.target_pose.header.frame_id = 'map'
+			goal.target_pose.header.frame_id = ''
 			goal.target_pose.header.stamp = rospy.Time.now()
 			goal.target_pose.pose.position.x = g[0]
 			goal.target_pose.pose.position.y = g[1]
@@ -48,35 +48,16 @@ class NavController():
 			[x,y,z,w]=quaternion_from_euler(0,0.0,0.0)
 			goal.target_pose.pose.orientation.x = x
 			goal.target_pose.pose.orientation.y = y
-			if(g == goals[-2]):
-				z = -0.844
-				w = 0.537
-			elif(g == goals[-3]):
-				z = 0.919
-				w = -0.395
-			elif(g == goals[-1]):
-				#z = 0.998
-				#w = -0.059
-				z = 1
-				w = 0
-			elif(g == goals[-4]):
-				z = 0
-				w = 0
-			else:
-				z = 1
 			goal.target_pose.pose.orientation.z = z
 			goal.target_pose.pose.orientation.w = w
 
+			print goal
 			#start moving
 			self.move_base.send_goal(goal)
 			print("goal:{}".format(g))
 
 			#allow TurtleBot up to 30 seconds to complete task
-			if(g == goals[-1] or g == goals[-2] or g == goals[-3]):
-				time = 15
-			else:
-				time = 10
-			success = self.move_base.wait_for_result(rospy.Duration(time)) 
+			success = self.move_base.wait_for_result(rospy.Duration(30)) 
 
 
 
@@ -117,7 +98,7 @@ def main():
 			coords.append(y)
 			all_goals.append(coords)
 	else:
-		all_goals = [[-3.7,0.087]]
+		all_goals = [[-2.12,0.372]]
 
 	print(all_goals)
 	# goals = [[-3.7,0.087],[-2.7,0.17]]
