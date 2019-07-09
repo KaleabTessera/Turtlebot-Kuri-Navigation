@@ -25,10 +25,23 @@ roslaunch turtlebot_navigation amcl_demo.launch map_file:=[MAP_FULL_PATH]
 e.g [MAP_FULL_PATH] - /home/osboxes/RoboticsProject/robotics_project_2019/src/map/my_map.yaml
 
 ### Run Naviagtion
+#### Manually specify coords
 ```
+cd robotics_project_2019/src/navigate/src
 python navigate_kuri.py --org " 0.030,0.309" --dest " -1, -1.71" " 1, -3.41" " -1, -5" " 0.115, -5.74" " 1,-5" " -1,-3.53"
-
 ```
+#### Use defined destination
+```
+cd robotics_project_2019/src/navigate/src
+```
+```./kuri.sh``` or ``` ./turtlebot.sh ```
+
+#### Send Kuri Home
+```
+cd robotics_project_2019/src/navigate/src
+./kuri_home.sh
+```
+
 Note the spaces before ```-``` are important. 
 ### Common error
 ```
