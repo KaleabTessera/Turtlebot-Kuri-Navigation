@@ -10,6 +10,9 @@ A Turtlebot and Kuri were both given a challenge of navigating an obstacle cours
 ## Navigation Demo
 [![Navigation Demo Video](https://img.youtube.com/vi/MbGdPQNUCcQ/0.jpg)](https://www.youtube.com/watch?v=MbGdPQNUCcQ)
 
+## Conclusion
+- Kuri's navigation was more consistent than the Turtlebot as it had better localization. The turtlebot would often get confused as to where it was and end up spinning while trying to localize. This could be because the Turtlebot is older.
+- Turtlebot had better online support as Kuri has been discontinued. 
 ## How to Run
 ### 1. Source environment vars
 ```
