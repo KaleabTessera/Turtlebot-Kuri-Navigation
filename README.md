@@ -1,4 +1,15 @@
-# Self-driving Turtlebots
+# Navigating Robots - Turtlebot and Kuri
+## Description 
+A Turtlebot and Kuri were both given a challenge of navigating an obstacle course (containing boxes and cones). This was done to test whose navigation and localization was better in a static and dynamic environment (dynamic refers to when both robots are navigating the obstacle course together). 
+
+## Map
+![Map File](src/map/cones2_new.png "Title")
+- Squares are boxes.
+- Dots are cones.
+
+## Navigation Demo
+[![Navigation Demo Video](https://img.youtube.com/vi/MbGdPQNUCcQ/0.jpg)](https://www.youtube.com/watch?v=MbGdPQNUCcQ)
+
 ## How to Run
 ### 1. Source environment vars
 ```
